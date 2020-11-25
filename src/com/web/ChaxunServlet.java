@@ -13,10 +13,10 @@ import java.util.List;
 
 /**
  * @Author: Tanoty
- * @Date: 2020/11/25 13:54
+ * @Date: 2020/11/25 14:49
  */
-@WebServlet(name = "DeleteUserServlet", urlPatterns = "/DeleteUserServlet")
-public class DeleteUserServlet extends HttpServlet {
+@WebServlet(name = "ChaxunServlet", urlPatterns = "/ChaxunServlet")
+public class ChaxunServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,8 +26,7 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StudentDaoImpl studentDao = new StudentDaoImpl();
         String n = request.getParameter("name");
-        boolean d = studentDao.deleteUser(n);
-        List<Student> list = studentDao.queryAllUsers();
+        List<Student> list = studentDao.chaxun(n);
         request.setAttribute("list", list);
         request.getRequestDispatcher("/userList.jsp").forward(request, response);
     }

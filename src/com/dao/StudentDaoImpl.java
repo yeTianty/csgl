@@ -76,15 +76,12 @@ public class StudentDaoImpl extends MysqlImpl implements StudentDao {
                 student.setEmail(resultSet.getString("email"));
                 student.setLove(resultSet.getString("love"));
                 sz.add(student);
-
             }
             closeMysql();
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-
-
         return sz;
     }
 
@@ -102,5 +99,26 @@ public class StudentDaoImpl extends MysqlImpl implements StudentDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Student> chaxun(String name) {
+        List<Student> cx = new ArrayList<>();
+        try {
+            mysql();
+            ResultSet resultSet = inquiry("select * from student where name = '" + name + "'");
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setName(resultSet.getString("name"));
+                student.setPassword(resultSet.getString("password"));
+                student.setEmail(resultSet.getString("email"));
+                student.setLove(resultSet.getString("love"));
+                cx.add(student);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cx;
     }
 }

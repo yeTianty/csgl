@@ -44,4 +44,6 @@ public interface StudentDao {
      * @return boolean
      */
     boolean deleteUser(String name);
+
+    List<Student> chaxun(String name);
 }
