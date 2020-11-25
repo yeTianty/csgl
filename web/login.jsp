@@ -18,7 +18,7 @@
         <h1>超市账单管理系统</h1>
     </header>
     <section class="loginCont">
-        <form class="loginForm" action="http://localhost:8080/csgl_war_exploded/LoginServle" method="post">
+        <form class="loginForm" action="http://localhost:8081/csgl_war_exploded/LoginServle" method="post">
             <div class="inputbox">
                 <label for="user">用户名：</label>
                 <input id="user" type="text" name="username" placeholder="请输入用户名" required/>

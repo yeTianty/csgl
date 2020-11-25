@@ -1,15 +1,20 @@
 package com.dao;
 
+import com.daomian.Student;
+import com.mysql.MysqlImpl;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: Tanoty
  * @Date: 2020/11/23 10:58
  */
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoImpl extends MysqlImpl implements StudentDao {
 
     @Override
     public boolean loginUser(String name, String password) {
@@ -40,38 +45,62 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public int storageUser(String name, String password, String email, String love) {
-        String url = "jdbc:mysql://localhost:3306/ty";
-        String rootName = "root";
-        String rootPassword = "root";
-        //链接数据库
-        Connection connection = null;
-        //查询数据库
-        ResultSet rs = null;
-        //修改数据库
-        PreparedStatement preparedStatement = null;
-        int i = 0;
+    public boolean storageUser(String name, String password, String email, String love) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(url, rootName, rootPassword);
-            String cs = "select * from student where name = '+name+'";
-            preparedStatement = connection.prepareStatement(cs);
-            rs = preparedStatement.executeQuery(cs);
-            while (rs.next()) {
-                if (rs.getString("name").equals(name)) {
-                    return 1;
-                }
-            }
-            String sql = "insert student(name, password, email, love) values('" + name + "','" + password + "','" + email + "','" + love + "')";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            i = ps.executeUpdate();
+            mysql();
+            int i = modifyMysql("insert student(name, password, email, love) value ('" + name + "','" + password + "','" + email + "','" + love + "')");
             if (i > 0) {
-                return 2;
+                closeMysql();
+                return true;
             }
+            closeMysql();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return 0;
+        return false;
+    }
+
+    @Override
+    public List<Student> queryAllUsers() {
+        List<Student> sz = new ArrayList<>();
+        try {
+            mysql();
+            ResultSet resultSet = inquiry("select * from student");
+            while (resultSet.next()) {
+                Student student = new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setName(resultSet.getString("name"));
+                student.setPassword(resultSet.getString("password"));
+                student.setEmail(resultSet.getString("email"));
+                student.setLove(resultSet.getString("love"));
+                sz.add(student);
+
+            }
+            closeMysql();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+
+        return sz;
+    }
+
+    @Override
+    public boolean deleteUser(String name) {
+        try {
+            mysql();
+            int resultSet = modifyMysql("delete from student where name = '" + name + "'");
+            if (resultSet > 0) {
+                closeMysql();
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

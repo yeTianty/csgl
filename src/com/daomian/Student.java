@@ -1,4 +1,4 @@
-package daomian;
+package com.daomian;
 
 /**
  * @Author: Tanoty

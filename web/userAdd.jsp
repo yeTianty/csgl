@@ -20,7 +20,7 @@
 
     <div class="publicHeaderR">
         <p><span>下午好！</span><span style="color: #fff21b"> Admin</span> , 欢迎你！</p>
-        <a href="login.html">退出</a>
+        <a href="login.jsp">退出</a>
     </div>
 </header>
 <!--时间-->
@@ -34,11 +34,11 @@
         <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
         <nav>
             <ul class="list">
-                <li><a href="billList.html">账单管理</a></li>
-                <li><a href="providerList.html">供应商管理</a></li>
-                <li id="active"><a href="userList.html">用户管理</a></li>
-                <li><a href="password.html">密码修改</a></li>
-                <li><a href="login.html">退出系统</a></li>
+                <li><a href="billList.jsp">账单管理</a></li>
+                <li><a href="providerList.jsp">供应商管理</a></li>
+                <li id="active"><a href="userList.jsp">用户管理</a></li>
+                <li><a href="password.jsp">密码修改</a></li>
+                <li><a href="login.jsp">退出系统</a></li>
             </ul>
         </nav>
     </div>
@@ -48,13 +48,13 @@
             <span>用户管理页面 >> 用户添加页面</span>
         </div>
         <div class="providerAdd">
-            <form action="http://localhost:8080/csgl_war_exploded/addServlet" method="post">
+            <form action="http://localhost:8081/csgl_war_exploded/addServlet" method="post">
                 <!--div的class 为error是验证错误，ok是验证成功-->
 
                 <div>
                     <label for="userName">用户名称：</label>
                     <input type="text" name="userName" id="userName"/>
-                    <span>${str}</span>
+                    <span>${uname}</span>
                 </div>
                 <div>
                     <label for="userpassword">用户密码：</label>
