@@ -45,5 +45,22 @@ public interface StudentDao {
      */
     boolean deleteUser(String name);
 
-    List<Student> chaxun(String name);
+    /**
+     * 查询单个成员数据
+     *
+     * @param name 用户名
+     * @return 返回单个成员数组
+     */
+    List<Student> querySingleData(String name);
+
+    /**
+     * 替换成员数据
+     *
+     * @param uData 原数据
+     * @param data  现有数据
+     * @param name  字段名
+     * @return 是否替换成功
+     */
+    boolean replaceMemberData(String uData, String data, String name);
+
 }

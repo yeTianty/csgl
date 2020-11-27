@@ -30,5 +30,12 @@ public interface Mysql {
      */
     int modifyMysql(String sql);
 
+    /**
+     * 修改数据库
+     *
+     * @param sql 数据库查询指令
+     * @return 返回1或者0
+     */
+    int modifyDatabase(String sql);
 
 }

@@ -65,5 +65,18 @@ public class MysqlImpl implements Mysql {
         return q;
     }
 
+    @Override
+    public int modifyDatabase(String sql) {
+        int i = 0;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            i = ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("数据库修改模块出错！");
+            e.printStackTrace();
+        }
+        return i;
+    }
+
 
 }

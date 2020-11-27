@@ -47,12 +47,14 @@
             <strong>你现在所在的位置是:</strong>
             <span>用户管理页面</span>
         </div>
-        <div class="search">
-            <span>用户名：</span>
-            <input type="text" placeholder="请输入用户名"/>
-            <input type="button" value="查询"/>
-            <a href="userAdd.jsp">添加用户</a>
-        </div>
+        <form action="http://localhost:8081/csgl_war_exploded/ChaxunServlet" method="post">
+            <div class="search">
+                <span>用户名：</span>
+                <input type="text" placeholder="请输入用户名" name="name"/>
+                <input type="submit" value="查询"/>
+                <a href="userAdd.jsp">添加用户</a>
+            </div>
+        </form>
         <!--用户-->
         <table class="providerTable" cellpadding="0" cellspacing="0">
             <tr class="firstTr">
@@ -71,8 +73,9 @@
                     <td>${ls.email}</td>
                     <td>${ls.love}</td>
                     <td>
-                        <a href="userView.jsp"><img src="img/read.png" alt="查看" title="查看"/></a>
-                        <a href="userUpdate.jsp"><img src="img/xiugai.png" alt="修改" title="修改"/></a>
+                        <a href="#"><img src="img/read.png" alt="查看" title="查看"/></a>
+                        <a href="http://localhost:8081/csgl_war_exploded/UserUpdateServlet?name=${ls.name}"><img
+                                src="img/xiugai.png" alt="修改" title="修改"/></a>
                         <a href="http://localhost:8081/csgl_war_exploded/DeleteUserServlet?name=${ls.name}" class="qwe"><img
                                 src="img/schu.png" alt="删除" title="删除"/></a>
                     </td>

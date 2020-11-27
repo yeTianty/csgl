@@ -19,15 +19,15 @@ import java.util.List;
 public class ChaxunServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String name = request.getParameter("name");
+        StudentDaoImpl studentDao = new StudentDaoImpl();
+        List<Student> list = studentDao.querySingleData(name);
+        request.setAttribute("list", list);
+        request.getRequestDispatcher("/userList.jsp").forward(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StudentDaoImpl studentDao = new StudentDaoImpl();
-        String n = request.getParameter("name");
-        List<Student> list = studentDao.chaxun(n);
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("/userList.jsp").forward(request, response);
+
     }
 }

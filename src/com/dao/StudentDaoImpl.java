@@ -102,23 +102,42 @@ public class StudentDaoImpl extends MysqlImpl implements StudentDao {
     }
 
     @Override
-    public List<Student> chaxun(String name) {
-        List<Student> cx = new ArrayList<>();
+    public List<Student> querySingleData(String name) {
+        List<Student> list = new ArrayList<>();
         try {
             mysql();
-            ResultSet resultSet = inquiry("select * from student where name = '" + name + "'");
-            while (resultSet.next()) {
+            ResultSet rs = inquiry("select * from student where name = '" + name + "'");
+            while (rs.next()) {
                 Student student = new Student();
-                student.setId(resultSet.getInt("id"));
-                student.setName(resultSet.getString("name"));
-                student.setPassword(resultSet.getString("password"));
-                student.setEmail(resultSet.getString("email"));
-                student.setLove(resultSet.getString("love"));
-                cx.add(student);
+                student.setId(rs.getInt("id"));
+                student.setName(rs.getString("name"));
+                student.setPassword(rs.getString("password"));
+                student.setEmail(rs.getString("email"));
+                student.setLove(rs.getString("love"));
+                list.add(student);
             }
+            closeMysql();
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return cx;
+        return null;
     }
+
+    @Override
+    public boolean replaceMemberData(String uData, String data, String name) {
+        try {
+            mysql();
+            int i = modifyDatabase("update student set " + name + " = replace(" + name + ",'" + uData + "','" + data + "')");
+            if (i > 0) {
+                closeMysql();
+                return true;
+            }
+            closeMysql();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }
