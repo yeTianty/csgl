@@ -10,9 +10,9 @@ import java.sql.ResultSet;
  * @Date: 2020/11/25 10:09
  */
 public class MysqlImpl implements Mysql {
-    String url = "jdbc:mysql://localhost:3306/ty";
+    String url = "jdbc:mysql://39.99.209.230:3306/csgl";
     String rootName = "root";
-    String rootPassword = "root";
+    String rootPassword = "setusb";
     //链接数据库
     Connection connection = null;
     //查询数据库
